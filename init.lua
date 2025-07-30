@@ -179,11 +179,16 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
---
+
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>1', '<cmd>tablast<CR>')
+vim.keymap.set('n', '<leader>2', '<cmd>tabNext<CR>')
+
+vim.keymap.set('n', '<leader>tc', '<cmd>vsplit term://%:p:h//bash<CR>', { desc = 'open vsplit terminal in current pwd' })
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -890,11 +895,16 @@ require('lazy').setup({
           comments = { italic = false }, -- Disable italics in comments
         },
       }
+      vim.cmd.colorscheme 'industry'
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.hi 'Cursor guifg=white guibg=red'
 
+      vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci:ver25-Cursor/lCursor,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
 
@@ -984,7 +994,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
